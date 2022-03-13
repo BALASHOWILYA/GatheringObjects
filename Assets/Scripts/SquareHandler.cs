@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,14 +6,13 @@ public class SquareHandler : MonoBehaviour
     [SerializeField] private Rigidbody2D squareRidgidbody;
 
     private Camera _mainCamera;
-    private Vector2 _pos;
 
     private void Start()
     {
         _mainCamera = Camera.main;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         
         if (squareRidgidbody == null) return;
@@ -27,8 +24,7 @@ public class SquareHandler : MonoBehaviour
         Vector3 worldPosition = _mainCamera.ScreenToWorldPoint(touchPosition);
                 
         squareRidgidbody.position = worldPosition;
-           
-        
+            
     }
 
     

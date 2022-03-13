@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private GameObject circlePrefab;
-    [SerializeField] private Transform _positionSquare;
+    [SerializeField] private Transform positionSquare;
 
     private List<GameObject> _circlePrefab = new List<GameObject>();
     private int _circleNum = 5;
@@ -17,18 +15,20 @@ public class SceneController : MonoBehaviour
     {
         CreateCircles();
     }
-    public void CreateCircles()
+
+    private void CreateCircles()
     {
         for(int i = 0; i < _circleNum; i++)
         {
-            
+           
             _pos = new Vector3(Random.Range(-6, 6), Random.Range(-4, 4));
-            if (_positionSquare.position == _pos)
+
+            if (Mathf.Abs(positionSquare.position.x - _pos.x) > 2 || Mathf.Abs(positionSquare.position.y - _pos.y) > 2)
             {
-                i--;
-                continue;
+                _circlePrefab.Add(Instantiate(circlePrefab, _pos, Quaternion.identity));
             }
-            _circlePrefab.Add(Instantiate(circlePrefab, _pos, Quaternion.identity));
+            else i--;
+            
         }
         
     }
